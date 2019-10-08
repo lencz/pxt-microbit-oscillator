@@ -18,12 +18,15 @@ namespace tryout {
         console.log("" + v)
     }
 
-    //% block="Oscillator %v"
+    //% block="Oscillator with waveshape %w, minimum value %min, maximum value %max, and frequency %freq / min"
     //% enumName="WaveShape"
     //% enumMemberName="waveshape"
     //% enumPromptHint="Shape"
     //% enumInitialMembers="Sawtooth, Triangle, Square, Sine"
-    export function secondFunction(v: WaveShape): void {
-        console.log("" + v)
+    export function oscillator(w: WaveShape, min: number, max: number, freq: number): void {
+        console.logValue("shape:", w)
+        console.logValue("min:", min)
+        console.logValue("max:", max)
+        console.logValue("freq:", freq)
     }
 }
