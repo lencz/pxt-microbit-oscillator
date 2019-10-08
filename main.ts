@@ -1,4 +1,4 @@
-//% color=78 weight=100 icon="\uf1d1" block="Microbit Tryout"
+//% color=0 weight=100 icon="\uf1d1" block="Microbit Tryout"
 //% groups=['Tryout']
 
 namespace Tryout {
