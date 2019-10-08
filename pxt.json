@@ -4,8 +4,7 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "pxt-microbit-test": "workspace:4c7ff7a7-34c3-4cb4-664b-943a6f489687"
+        "radio": "*"
     },
     "files": [
         "README.md",
