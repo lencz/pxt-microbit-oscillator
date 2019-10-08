@@ -2,7 +2,7 @@
 
 namespace tryout {
     //% block="show|number %v"
-    //% v.min=0 v.max= 42 x.defl=25
+    //% v.min=0 v.max= 42 v.defl=25
     export function showNumber(v: number, interval: number = 150): void {
         console.log("" + v)
     }
