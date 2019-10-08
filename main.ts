@@ -6,4 +6,8 @@ namespace tryout {
     export function showNumber(v: number, interval: number = 150): void {
         console.log("" + v)
     }
+
+    export function secondFunction(v: number, interval: number = 150): void {
+        console.log("" + v)
+    }
 }
