@@ -7,6 +7,7 @@ namespace tryout {
         console.log("" + v)
     }
 
+    //% block="need|this|block|annotation %v" v.min = 0 v.max = 42 x.defl = 25
     export function secondFunction(v: number, interval: number = 150): void {
         console.log("" + v)
     }
