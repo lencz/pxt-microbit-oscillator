@@ -9,8 +9,8 @@ enum WaveShape {
     Triangle
 }
 
-//% color=#1ca7c1 weight=0 icon="\uf1d1" block="Microbit Tryout"
-namespace tryout {
+//% color=#1ca7c1 weight=0 icon="\uf1d1" block="Oscillator"
+namespace oscillator {
 
     let timeOfLastTrigger: number = 0
     let timeSinceLastTrigger: number = 0
@@ -103,7 +103,7 @@ namespace tryout {
         }
         if (state) {
             return (Math.map(timeSinceLastTrigger, 0, period / 2, 0, 1000))
-        } else  {
+        } else {
             return (Math.map(timeSinceLastTrigger, 0, period / 2, 1000, 0))
         }
     }
