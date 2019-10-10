@@ -1,4 +1,3 @@
-
 enum WaveShape {
     //% block="Sawtooth"
     Sawtooth,
@@ -6,27 +5,33 @@ enum WaveShape {
     Sine,
     //% block="Square"
     Square,
-    //% block="Sawtooth"
+    //% block="Triangle"
     Triangle
 }
 
-//% color=#1c1337 weight=0 icon="\uf1d1" block="Microbit Tryout"
+//% color=#1ca7c1 weight=0 icon="\uf1d1" block="Microbit Tryout"
 namespace tryout {
-    //% block="show|number %v"
+
+    let timeSinceLastTrigger: number = 0
+    let state: boolean = false
+
+    //% block="log|number %v"
     //% v.min=0 v.max= 42 v.defl=25
-    export function showNumber(v: number, interval: number = 150): void {
-        console.log("" + v)
+    export function logNumber(v: number, interval: number = 150): void {
+        console.logValue("Number", v)
     }
 
-    //% block="Oscillator with waveshape %w, minimum value %min, maximum value %max, and frequency %freq / min"
+    //% block="Create wave %w with period of (ms) %period"
     //% enumName="WaveShape"
     //% enumMemberName="waveshape"
     //% enumPromptHint="Shape"
     //% enumInitialMembers="Sawtooth, Triangle, Square, Sine"
-    export function oscillator(w: WaveShape, min: number, max: number, freq: number): void {
-        console.logValue("shape:", w)
-        console.logValue("min:", min)
-        console.logValue("max:", max)
-        console.logValue("freq:", freq)
+    //% period.defl=1000
+    export function oscillator(w: WaveShape, period: number): number {
+        let value: number
+        let now: number
+        now = input.runningTime()
+        //if()
+        return (now)
     }
 }
