@@ -28,7 +28,7 @@ namespace oscillator {
     //% enumPromptHint="Shape"
     //% enumInitialMembers="Sawtooth, Triangle, Square, Sine"
     //% period.defl=1000
-    export function oscillator(w: WaveShape, period: number): number {
+    export function oscillate(w: WaveShape, period: number): number {
         switch (w) {
             case 0: {
                 return (sawtoothWave(period))
