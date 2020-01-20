@@ -9,6 +9,9 @@ enum WaveShape {
     Triangle
 }
 
+const MIN : number = 0;
+const MAX : number = 1000;
+
 //% color=#1ca7c1 weight=0 icon="\uf1d1" block="Oscillator"
 namespace oscillator {
 
@@ -27,7 +30,7 @@ namespace oscillator {
         public oscillate(w: WaveShape, period: number): number {
             switch (w) {
                 case 0: {
-                    return (0);
+                    return this.sawtoothWave(period);
                 }
                 case 1: {
                     return (1);
@@ -42,6 +45,17 @@ namespace oscillator {
                     return (0);
                 }
             }
+        }
+
+        sawtoothWave(period: number): number {
+            let now: number
+            now = input.runningTime()
+            this.timeSinceLastTrigger = now - this.timeOfLastTrigger
+            if (this.timeSinceLastTrigger >= period) {
+                this.timeOfLastTrigger = now
+                this.timeSinceLastTrigger = 0
+            }
+            return (Math.map(this.timeSinceLastTrigger, 0, period, MIN, MAX))
         }
     }
 
