@@ -16,12 +16,6 @@ namespace oscillator {
     let timeSinceLastTrigger: number = 0
     let state: number = 0
 
-    //% block="log|number %v"
-    //% v.min=0 v.max= 42 v.defl=25
-    export function logNumber(v: number, interval: number = 150): void {
-        console.logValue("Number", v)
-    }
-
     //% block="Create wave %w with period of (ms) %period"
     //% enumName="WaveShape"
     //% enumMemberName="waveshape"
