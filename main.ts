@@ -9,102 +9,118 @@ enum WaveShape {
     Triangle
 }
 
+/**
+ * minimum value for each oscillator
+ */
+const MIN: number = 0;
+/**
+ * maximum value for each oscillator
+ */
+const MAX: number = 1000;
+
 //% color=#1ca7c1 weight=0 icon="\uf1d1" block="Oscillator"
 namespace oscillator {
 
-    let timeOfLastTrigger: number = 0
-    let timeSinceLastTrigger: number = 0
-    let state: number = 0
+    /**
+    * Oscillator class, each oscillator is indipendent
+    */
+    export class Oscillator {
+        timeOfLastTrigger: number;
+        state: number;
 
-    //% block="log|number %v"
-    //% v.min=0 v.max= 42 v.defl=25
-    export function logNumber(v: number, interval: number = 150): void {
-        console.logValue("Number", v)
-    }
+        constructor() {
+            this.state = 0
+            this.timeOfLastTrigger = 0
+        }
 
-    //% block="Create wave %w with period of (ms) %period"
-    //% enumName="WaveShape"
-    //% enumMemberName="waveshape"
-    //% enumPromptHint="Shape"
-    //% enumInitialMembers="Sawtooth, Triangle, Square, Sine"
-    //% period.defl=1000
-    export function oscillator(w: WaveShape, period: number): number {
-        switch (w) {
-            case 0: {
-                return (sawtoothWave(period))
-                break;
-            }
-            case 1: {
-                return (sinusWave(period))
-                break;
-            }
-            case 2: {
-                return (squareWave(period))
-                break;
-            }
-            case 3: {
-                return (triangleWave(period))
-                break;
-            }
-            default: {
-                return (0);
-                break;
+        //% blockId="produce_sample"
+        //% block="oscillator %osc produce %w wave with period of (ms) %period"
+        //% enumName="WaveShape"
+        //% enumMemberName="waveshape"
+        //% enumPromptHint="Shape"
+        //% enumInitialMembers="Sawtooth, Triangle, Square, Sine"
+        //% period.defl=1000
+        public oscillate(w: WaveShape, period: number): number {
+            switch (w) {
+                case 0: {
+                    return this.sawtoothWave(period)
+                }
+                case 1: {
+                    return this.sinusWave(period)
+                }
+                case 2: {
+                    return this.squareWave(period)
+                }
+                case 3: {
+                    return this.triangleWave(period)
+                }
+                default: {
+                    return (0)
+                }
             }
         }
-    }
 
-    function sawtoothWave(period: number): number {
-        let now: number
-        now = input.runningTime()
-        timeSinceLastTrigger = now - timeOfLastTrigger
-        if (timeSinceLastTrigger >= period) {
-            timeOfLastTrigger = now
-            timeSinceLastTrigger = 0
+        sawtoothWave(period: number): number {
+            let now: number
+            let timeSinceLastTrigger: number
+            now = input.runningTime()
+            timeSinceLastTrigger = now - this.timeOfLastTrigger
+            if (timeSinceLastTrigger >= period) {
+                this.timeOfLastTrigger = now
+                timeSinceLastTrigger = 0
+            }
+            return Math.map(timeSinceLastTrigger, 0, period, MIN, MAX)
         }
-        return (Math.constrain(timeSinceLastTrigger, 0, period))
-    }
 
-    function sinusWave(period: number): number {
-        let value: number
-        let now: number
-        now = input.runningTime()
-        value = now / (1000 / (2 * Math.PI))
-        return (Math.sin(value))
-    }
+        sinusWave(period: number): number {
+            let now: number
+            let value: number
+            now = input.runningTime()
+            value = (now / period) * 2 * Math.PI
+            return Math.map(Math.sin(value), -1, 1, MIN, MAX)
+        }
 
-    function squareWave(period: number): number {
-        let now: number
-        now = input.runningTime()
-        timeSinceLastTrigger = now - timeOfLastTrigger
-        if (timeSinceLastTrigger >= period / 2) {
-            if (state) {
-                state = 0;
+        squareWave(period: number): number {
+            let now: number
+            let timeSinceLastTrigger: number
+            now = input.runningTime()
+            timeSinceLastTrigger = now - this.timeOfLastTrigger
+            if (timeSinceLastTrigger >= period / 2) {
+                if (this.state) {
+                    this.state = 0;
+                } else {
+                    this.state = 1;
+                }
+                this.timeOfLastTrigger = now
+                timeSinceLastTrigger = 0
+            }
+            return this.state ? MAX : MIN
+        }
+
+        triangleWave(period: number): number {
+            let now: number
+            let timeSinceLastTrigger: number
+            now = input.runningTime()
+            timeSinceLastTrigger = now - this.timeOfLastTrigger
+            if (timeSinceLastTrigger >= period / 2) {
+                if (this.state) {
+                    this.state = 0;
+                } else {
+                    this.state = 1;
+                }
+                this.timeOfLastTrigger = now
+                timeSinceLastTrigger = 0
+            }
+            if (this.state) {
+                return (Math.map(timeSinceLastTrigger, 0, period / 2, MIN, MAX))
             } else {
-                state = 1;
+                return (Math.map(timeSinceLastTrigger, 0, period / 2, MAX, MIN))
             }
-            timeOfLastTrigger = now
-            timeSinceLastTrigger = 0
         }
-        return (state)
     }
 
-    function triangleWave(period: number): number {
-        let now: number
-        now = input.runningTime()
-        timeSinceLastTrigger = now - timeOfLastTrigger
-        if (timeSinceLastTrigger >= period / 2) {
-            if (state) {
-                state = 0;
-            } else {
-                state = 1;
-            }
-            timeOfLastTrigger = now
-            timeSinceLastTrigger = 0
-        }
-        if (state) {
-            return (Math.map(timeSinceLastTrigger, 0, period / 2, 0, 1000))
-        } else {
-            return (Math.map(timeSinceLastTrigger, 0, period / 2, 1000, 0))
-        }
+    //% blockId="create_Oscillator" block="create oscillator"
+    export function createOscillator(): Oscillator {
+        return new Oscillator();
     }
-}
+} 
