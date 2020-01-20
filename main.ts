@@ -17,7 +17,6 @@ namespace oscillator {
 
     export class Oscillator {
         timeOfLastTrigger: number;
-        timeSinceLastTrigger: number;
         state: number;
 
         //% blockId="produce_sample"
@@ -50,12 +49,11 @@ namespace oscillator {
         sawtoothWave(period: number): number {
             let now: number
             now = input.runningTime()
-            this.timeSinceLastTrigger = now - this.timeOfLastTrigger
-            if (this.timeSinceLastTrigger >= period) {
+            let timeSinceLastTrigger : number = now - this.timeOfLastTrigger
+            if (timeSinceLastTrigger >= period) {
                 this.timeOfLastTrigger = now
-                this.timeSinceLastTrigger = 0
             }
-            return (Math.map(this.timeSinceLastTrigger, 0, period, MIN, MAX))
+            return (Math.map(timeSinceLastTrigger, 0, period, MIN, MAX))
         }
     }
 
