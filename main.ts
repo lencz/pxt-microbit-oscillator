@@ -17,7 +17,7 @@ namespace oscillator {
         timeSinceLastTrigger: number;
         state: number;
 
-        //% block="oscillator %scillator produce %w wave with period of (ms) %period"
+        //% block="oscillator %osc produce %w wave with period of (ms) %period"
         //% enumName="WaveShape"
         //% enumMemberName="waveshape"
         //% enumPromptHint="Shape"
@@ -26,19 +26,19 @@ namespace oscillator {
         public oscillate(w: WaveShape, period: number): number {
             switch (w) {
                 case 0: {
-                    return 0;
+                    return (0);
                 }
                 case 1: {
-                    return 1;
+                    return (1);
                 }
                 case 2: {
-                    return 2;
+                    return (2);
                 }
                 case 3: {
-                    return 3;
+                    return (3);
                 }
                 default: {
-                    return 0;
+                    return (0);
                 }
             }
         }
