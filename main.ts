@@ -9,17 +9,27 @@ enum WaveShape {
     Triangle
 }
 
+/**
+ * minimum value for each oscillator
+ */
 const MIN: number = 0;
+/**
+ * maximum value for each oscillator
+ */
 const MAX: number = 1000;
 
 //% color=#1ca7c1 weight=0 icon="\uf1d1" block="Oscillator"
 namespace oscillator {
 
+    /**
+    * Oscillator class, each oscillator is indipendent
+    */
     export class Oscillator {
         timeOfLastTrigger: number;
         state: number;
 
         constructor() {
+            this.state = 0
             this.timeOfLastTrigger = 0
         }
 
