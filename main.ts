@@ -32,81 +32,22 @@ namespace oscillator {
         public oscillate(w: WaveShape, period: number): number {
             switch (w) {
                 case 0: {
-                    return (this.sawtoothWave(period))
-                    break;
+                    return 0
                 }
                 case 1: {
-                    return (this.sinusWave(period))
-                    break;
+                    return 1
                 }
                 case 2: {
-                    return (this.squareWave(period))
-                    break;
+                    return 2
                 }
                 case 3: {
-                    return (this.triangleWave(period))
-                    break;
+                    return 3
                 }
                 default: {
-                    return (0);
-                    break;
+                    return 0
                 }
-            }
-        }
-
-        sawtoothWave(period: number): number {
-            let now: number
-            now = input.runningTime()
-            this.timeSinceLastTrigger = now - this.timeOfLastTrigger
-            if (this.timeSinceLastTrigger >= period) {
-                this.timeOfLastTrigger = now
-                this.timeSinceLastTrigger = 0
-            }
-            return (Math.constrain(this.timeSinceLastTrigger, 0, period))
-        }
-
-        sinusWave(period: number): number {
-            let value: number
-            let now: number
-            now = input.runningTime()
-            value = now / (1000 / (2 * Math.PI))
-            return (Math.sin(value))
-        }
-
-        squareWave(period: number): number {
-            let now: number
-            now = input.runningTime()
-            this.timeSinceLastTrigger = now - this.timeOfLastTrigger
-            if (this.timeSinceLastTrigger >= period / 2) {
-                if (this.state) {
-                    this.state = 0;
-                } else {
-                    this.state = 1;
-                }
-                this.timeOfLastTrigger = now
-                this.timeSinceLastTrigger = 0
-            }
-            return (this.state)
-        }
-
-        triangleWave(period: number): number {
-            let now: number
-            now = input.runningTime()
-            this.timeSinceLastTrigger = now - this.timeOfLastTrigger
-            if (this.timeSinceLastTrigger >= period / 2) {
-                if (this.state) {
-                    this.state = 0;
-                } else {
-                    this.state = 1;
-                }
-                this.timeOfLastTrigger = now
-                this.timeSinceLastTrigger = 0
-            }
-            if (this.state) {
-                return (Math.map(this.timeSinceLastTrigger, 0, period / 2, 0, 1000))
-            } else {
-                return (Math.map(this.timeSinceLastTrigger, 0, period / 2, 1000, 0))
             }
         }
     }
 }
+ 
