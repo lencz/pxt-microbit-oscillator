@@ -17,6 +17,7 @@ namespace oscillator {
         timeSinceLastTrigger: number;
         state: number;
 
+        //% blockId="produce_sample"
         //% block="oscillator %osc produce %w wave with period of (ms) %period"
         //% enumName="WaveShape"
         //% enumMemberName="waveshape"
@@ -42,5 +43,10 @@ namespace oscillator {
                 }
             }
         }
+    }
+
+    //% blockId="create_Oscillator" block="create oscillator"
+    export function createOscillator(): Oscillator {
+        return new Oscillator();
     }
 }
