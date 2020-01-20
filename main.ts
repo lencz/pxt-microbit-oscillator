@@ -53,7 +53,7 @@ namespace oscillator {
             if (timeSinceLastTrigger >= period) {
                 this.timeOfLastTrigger = now
             }
-            return (Math.map(timeSinceLastTrigger, 0, period, 0, 1000))
+            return timeSinceLastTrigger;
         }
     }
 
